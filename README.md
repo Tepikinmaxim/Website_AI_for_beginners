@@ -7,7 +7,7 @@ UI-библиотек.
 ## Как запустить
 
 ```bash
-cd /Users/a123/Documents/ZeroCoding/Site
+cd /Users/a123/Documents/ZeroCoding/Website_AI_for_beginners
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -43,7 +43,7 @@ ruff check app.py tests
 ## Структура
 
 ```text
-Site/
+Website_AI_for_beginners/
 ├── app.py                    # Flask-приложение, маршруты и список cards
 ├── requirements.txt          # рабочая зависимость Flask
 ├── requirements-dev.txt      # pytest и ruff

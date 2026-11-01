@@ -144,3 +144,8 @@
 - **Git:** по согласию пользователя репозиторий инициализирован, создан первый
   коммит `c37cda2` — `Add light theme, transparent logo and animated hero chip`.
   `ForMaxOnly/`, `.venv/` и кэши исключены через `.gitignore`.
+- **Запуск для просмотра (1 ноя 2026):** сервер поднят командой
+  `./.venv/bin/python app.py` на порту 5000, лог — `ForMaxOnly/logs/server.log`.
+  Порт до запуска был свободен, Flask 3.1.3 найден в `.venv`. Проверено HTTP:
+  `/` — 200, `/material/1` — 200, `/material/999` — 404. Остановка:
+  `kill 72075 72104` (родительский и дочерний процессы debug-режима).
