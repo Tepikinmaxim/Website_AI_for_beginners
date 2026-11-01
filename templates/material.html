@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}{{ card.title }} — AI-дайджест{% endblock %}
+{% block body_class %}material-page{% endblock %}
+
+{% block content %}
+<main id="main">
+  <!-- Обложка материала: картинка карточки + затемнение для читаемости -->
+  <section class="material-hero" aria-labelledby="material-title">
+    <img class="material-cover" src="{{ card.image_url }}" alt="" aria-hidden="true">
+    <div class="material-hero-shade" aria-hidden="true"></div>
+
+    <div class="container material-hero-inner" data-reveal>
+      <a class="back-link" href="{{ url_for('index') }}#digest">← Назад к дайджесту</a>
+      <p class="section-kicker">Материал {{ "%02d"|format(card.id) }} · 5 минут</p>
+      <h1 id="material-title">{{ card.title }}</h1>
+      <p class="material-subtitle">{{ card.subtitle }}</p>
+    </div>
+  </section>
+
+  <section class="section material-body" aria-label="Содержание материала">
+    <div class="container material-layout">
+      <article class="material-article" data-reveal>
+        <h2>Материал №{{ card.id }}</h2>
+        <p class="material-placeholder">Здесь будет подробный разбор для новичков</p>
+        <p>
+          Страница пока работает как заглушка. Полный текст появится в следующем
+          выпуске: примеры, готовые промпты и разбор типичных ошибок.
+        </p>
+        <a class="button button-primary" href="{{ url_for('index') }}#digest">Вернуться к дайджесту</a>
+      </article>
+
+      <aside class="material-aside" data-reveal style="--delay: 100ms">
+        <p class="aside-label">Коротко</p>
+        <dl class="material-facts">
+          <div>
+            <dt>Уровень</dt>
+            <dd>Новичок</dd>
+          </div>
+          <div>
+            <dt>Формат</dt>
+            <dd>Текст + примеры</dd>
+          </div>
+          <div>
+            <dt>Время</dt>
+            <dd>5 минут</dd>
+          </div>
+        </dl>
+        <p class="aside-note">Не нужно устанавливать программы. Достаточно браузера.</p>
+      </aside>
+    </div>
+  </section>
+</main>
+{% endblock %}

@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+
+{% block title %}AI-дайджест для новичков — 9 материалов о нейросетях{% endblock %}
+
+{% block content %}
+<main id="main">
+  <!-- Первый экран: крупный заголовок и декоративная неоновая сфера -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Выпуск 01 · для новичков</p>
+        <h1 class="hero-title" id="hero-title">
+          AI-дайджест
+          <span class="gradient-text">для новичков</span>
+        </h1>
+        <p class="hero-lead">
+          Девять коротких разборов о нейросетях, промптах и первых проектах.
+          Без сложного кода, запугивания и лишней теории.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="#digest">
+            Смотреть дайджест
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a class="button button-quiet" href="#how">Как это работает</a>
+        </div>
+
+        <dl class="hero-stats">
+          <div>
+            <dt>9</dt>
+            <dd>разборов</dd>
+          </div>
+          <div>
+            <dt>5</dt>
+            <dd>минут на материал</dd>
+          </div>
+          <div>
+            <dt>0</dt>
+            <dd>строк кода</dd>
+          </div>
+        </dl>
+      </div>
+
+      <!-- Декоративный визуал: ядро, орбиты и «стеклянные» чипы -->
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="orbit orbit-three"></div>
+
+        <div class="core">
+          <video
+            class="core-video"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="{{ url_for('static', filename='img/ai-chip.jpg') }}"
+            aria-hidden="true"
+            tabindex="-1"
+          >
+            <source src="{{ url_for('static', filename='media/ai-chip.mp4') }}" type="video/mp4">
+          </video>
+          <img class="core-poster" src="{{ url_for('static', filename='img/ai-chip.jpg') }}" alt="" aria-hidden="true">
+        </div>
+
+        <span class="float-chip chip-one">PROMPT</span>
+        <span class="float-chip chip-two">&lt;/&gt;</span>
+        <span class="float-chip chip-three">0 → 1</span>
+        <span class="float-chip chip-four">LLM</span>
+        <span class="spark spark-one"></span>
+        <span class="spark spark-two"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Бегущая строка задаёт ритм и добавляет движения без библиотек -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Промпты</span><span class="ticker-dot">✦</span>
+      <span>Нейросети</span><span class="ticker-dot">✦</span>
+      <span>Инструменты</span><span class="ticker-dot">✦</span>
+      <span>Без кода</span><span class="ticker-dot">✦</span>
+      <span>Первый проект</span><span class="ticker-dot">✦</span>
+      <span>Промпты</span><span class="ticker-dot">✦</span>
+      <span>Нейросети</span><span class="ticker-dot">✦</span>
+      <span>Инструменты</span><span class="ticker-dot">✦</span>
+      <span>Без кода</span><span class="ticker-dot">✦</span>
+      <span>Первый проект</span><span class="ticker-dot">✦</span>
+    </div>
+  </div>
+
+  <!-- Сетка карточек: 4 / 3 / 2 / 1 колонки в зависимости от ширины экрана -->
+  <section class="section digest" id="digest" aria-labelledby="digest-title">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">01 / Дайджест</p>
+          <h2 id="digest-title">Девять материалов,<br><span class="gradient-text">чтобы начать</span></h2>
+        </div>
+        <p class="section-note">
+          Выберите тему, на которую давно смотрели. Каждый материал — короткий
+          разбор с примерами и понятным следующим шагом.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        {% for card in cards %}
+        <article class="card" data-reveal style="--delay: {{ loop.index0 * 55 }}ms" data-card-id="{{ card.id }}">
+          <img
+            class="card-image"
+            src="{{ card.image_url }}"
+            alt="Обложка материала «{{ card.title }}»"
+            loading="{{ 'eager' if loop.index <= 3 else 'lazy' }}"
+            decoding="async"
+          >
+          <div class="card-shade" aria-hidden="true"></div>
+          <div class="card-glow" aria-hidden="true"></div>
+
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="card-index">{{ "%02d"|format(card.id) }}</span>
+              <span>5 минут</span>
+            </div>
+            <h3 class="card-title">{{ card.title }}</h3>
+            <p class="card-subtitle">{{ card.subtitle }}</p>
+            <a class="cta-button" href="{{ url_for('material', material_id=card.id) }}">
+              <span>Открыть материал</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Три шага: снимаем страх перед первым запуском -->
+  <section class="section how" id="how" aria-labelledby="how-title">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">02 / Как это работает</p>
+          <h2 id="how-title">Три шага<br><span class="gradient-text">до первого результата</span></h2>
+        </div>
+        <p class="section-note">
+          Никаких установок и подписок. Достаточно браузера и любопытства.
+        </p>
+      </div>
+
+      <ol class="steps">
+        <li class="step" data-reveal style="--delay: 0ms">
+          <span class="step-number">01</span>
+          <h3>Выберите тему</h3>
+          <p>Начните с того, что болит: учёба, работа, текст или картинки. Так мотивация не закончится на второй минуте.</p>
+        </li>
+        <li class="step" data-reveal style="--delay: 90ms">
+          <span class="step-number">02</span>
+          <h3>Повторите пример</h3>
+          <p>В каждом разборе есть готовый промпт. Скопируйте его, замените детали на свои и сравните ответы.</p>
+        </li>
+        <li class="step" data-reveal style="--delay: 180ms">
+          <span class="step-number">03</span>
+          <h3>Сделайте свой</h3>
+          <p>Соберите маленький результат: конспект, письмо, план или картинку. Один готовый файл лучше десяти сохранённых статей.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Финальный призыв к действию -->
+  <section class="section start" id="start" aria-labelledby="start-title">
+    <div class="container">
+      <div class="start-panel" data-reveal>
+        <div class="start-copy">
+          <p class="section-kicker">03 / Старт</p>
+          <h2 id="start-title">Начните с одного материала</h2>
+          <p>Пятнадцать минут — и у вас будет первый осмысленный диалог с нейросетью. Остальное подтянется.</p>
+        </div>
+        <a class="button button-primary button-large" href="{{ url_for('material', material_id=1) }}">
+          Открыть материал №1
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <span class="start-orbit" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

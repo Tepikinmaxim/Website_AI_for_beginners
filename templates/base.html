@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI-дайджест для новичков: девять коротких материалов о нейросетях, промптах и первых проектах.">
+  <meta name="theme-color" content="#f4f6fa">
+  <title>{% block title %}AI-дайджест для новичков{% endblock %}</title>
+
+  <!-- Шрифты: Inter для текста, Unbounded для крупных заголовков -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</head>
+<body class="{% block body_class %}home-page{% endblock %}">
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+  <!-- Общая шапка для всех страниц: логотип по центру между навигацией и действием -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <nav class="main-nav" aria-label="Основная навигация">
+        <ul>
+          <li><a href="{{ url_for('index') }}#digest" data-nav="digest">Дайджест</a></li>
+          <li><a href="{{ url_for('index') }}#how" data-nav="how">Как это работает</a></li>
+          <li><a href="{{ url_for('index') }}#start" data-nav="start">Старт</a></li>
+        </ul>
+      </nav>
+
+      <a class="logo" href="{{ url_for('index') }}" aria-label="AiMaximum — на главную">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="AiMaximum" width="430" height="225">
+      </a>
+
+      <div class="header-actions">
+        <a class="button button-small" href="{{ url_for('index') }}#digest">9 материалов</a>
+      </div>
+    </div>
+  </header>
+
+  {% block content %}{% endblock %}
+
+  <!-- Общий подвал: тот же логотип и обязательная подпись -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img class="footer-logo" src="{{ url_for('static', filename='img/logo.png') }}" alt="AiMaximum" width="430" height="225">
+        <p>Сделано компанией AiMaximum</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Навигация в подвале">
+        <a href="{{ url_for('index') }}#digest">Дайджест</a>
+        <a href="{{ url_for('index') }}#how">Как это работает</a>
+        <a href="{{ url_for('index') }}#start">Старт</a>
+      </nav>
+
+      <p class="footer-copy">© 2026 AI-дайджест. Учитесь в своём темпе.</p>
+    </div>
+  </footer>
+</body>
+</html>
